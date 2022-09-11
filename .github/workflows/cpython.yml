@@ -85,7 +85,7 @@ jobs:
     timeout-minutes: 10
     strategy:
       matrix:
-        python-version: [3.10]
+        python-version: ["3.10"]
     steps:
       - name: Check out source
         uses: actions/checkout@v2
@@ -220,7 +220,7 @@ jobs:
         run: |
           python -m delocate.cmd.delocate_wheel -w ./wheelhouse/ ./wheelhouse-tmp/iteration_utilities-0.11.0-cp39-cp39-macosx_10_14_x86_64.whl -v
       - name: Fix wheel (macOS with Python 3.10)
-        if: matrix.os == 'macos-latest' && matrix.python-version == 3.10
+        if: matrix.os == 'macos-latest' && matrix.python-version == "3.10"
         run: |
           python -m delocate.cmd.delocate_wheel -w ./wheelhouse/ ./wheelhouse-tmp/iteration_utilities-0.11.0-cp310-cp310-macosx_10_14_x86_64.whl -v
       - name: Install package
@@ -283,7 +283,7 @@ jobs:
   bundle-artifacts:
     runs-on: ubuntu-latest
     timeout-minutes: 10
-    needs: [build-docs, build, build-manylinux, build-sdist]
+    needs: [build, build-sdist]
     steps:
       - uses: actions/download-artifact@v2
         with:
